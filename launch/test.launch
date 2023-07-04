@@ -1,0 +1,26 @@
+<launch>
+    <arg name="map_file" value="$(find moro_server_test)/map/map.yaml"/>
+    <include file="$(find moro_server_test)/launch/rosbridge.launch">
+        <arg name="port" default="9090" />
+        <arg name="address" default="" />
+        <arg name="ssl" default="false" />
+        <arg name="certfile" default=""/>
+        <arg name="keyfile" default="" />
+
+        <arg name="retry_startup_delay" default="5" />
+
+        <arg name="fragment_timeout" default="600" />
+        <arg name="delay_between_messages" default="0" />
+        <arg name="max_message_size" default="None" />
+        <arg name="unregister_timeout" default="10" />
+
+        <arg name="use_compression" default="false" />
+
+        <arg name="authenticate" default="false" />
+
+        <arg name="topics_glob" default="[robot_state, feedback_vel, bms, current_head_angle, errors, scan_filtered, camera/color/image_raw, sonar, map, JobScheduler/feedback, move_base/GlobalPlanner/plan, API/head_ang, API/cmd_vel]" />
+        <arg name="services_glob" default="[CoreNode/mode_change, CoreNode/save_map_as, JobScheduler/goal, JobScheduler/cancel, JobScheduler/result, API/follow_me_mode]" />
+    </include>
+    <node pkg="moro_server_test" name="TestServer" type="test_server.py"/>
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+</launch>
