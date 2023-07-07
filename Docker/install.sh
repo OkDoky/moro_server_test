@@ -5,6 +5,8 @@ apt-get update && apt-get upgrade -y
 source /opt/ros/melodic/setup.bash
 
 apt-get install -y git curl wget apt-utils python-pip
+apt-get install -y ros-melodic-rosbridge-server ros-melodic-map-server ros-melodic-cv-bridge
+
 pip install opencv-python==4.2.0.32
 mkdir -p /root/catkin_ws/src && cd /root/catkin_ws/src && catkin_init_workspace
 
